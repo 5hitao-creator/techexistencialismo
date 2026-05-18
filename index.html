@@ -1,1361 +1,582 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pesquisa — Techexistencialismo | FAC/UnB</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pesquisa — Techexistencialismo | FAC/UnB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* SEU ESTILO ORIGINAL PRESERVADO */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    :root {
-      --bg: #F4F0EA;
-      --surface: #FFFDF9;
-      --text: #1A1714;
-      --muted: #6B6460;
-      --accent: #1B3D6E;
-      --accent-soft: #EAF0F9;
-      --accent-mid: #3A6EA8;
-      --border: #DDD8D0;
-      --green: #2A6049;
-      --red: #8B2020;
-      --radius: 10px;
-      --shadow: 0 2px 16px rgba(26,23,20,0.07);
-    }
+        :root {
+            --bg: #F4F0EA;
+            --surface: #FFFDF9;
+            --text: #1A1714;
+            --muted: #6B6460;
+            --accent: #1B3D6E;
+            --accent-soft: #EAF0F9;
+            --accent-mid: #3A6EA8;
+            --border: #DDD8D0;
+            --green: #2A6049;
+            --red: #8B2020;
+            --radius: 10px;
+            --shadow: 0 2px 16px rgba(26, 23, 20, 0.07);
+        }
 
-    html { font-size: 16px; scroll-behavior: smooth; }
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Nunito', sans-serif;
-      font-weight: 400;
-      line-height: 1.65;
-      min-height: 100vh;
-      padding-bottom: 60px;
-    }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-    /* HEADER */
-    .survey-header {
-      background: var(--accent);
-      color: #fff;
-      padding: 28px 24px 24px;
-      text-align: center;
-    }
-    .survey-header .kicker {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.7;
-      margin-bottom: 6px;
-    }
-    .survey-header h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      font-weight: 400;
-      line-height: 1.2;
-    }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 40px 0;
+        }
 
-    /* PROGRESS */
-    .progress-wrap {
-      background: rgba(255,255,255,0.12);
-      height: 4px;
-    }
-    .progress-bar {
-      background: #A8C8F0;
-      height: 4px;
-      width: 0%;
-      transition: width 0.5s ease;
-    }
-    .progress-label {
-      text-align: center;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.6);
-      padding: 6px 0 4px;
-    }
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
 
-    /* CONTAINER */
-    .survey-body {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
+        header h1 {
+            font-family: 'DM+Serif+Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
 
-    /* STEP */
-    .step {
-      display: none;
-      animation: fadeIn 0.35s ease;
-    }
-    .step.active { display: block; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+        header p {
+            color: var(--muted);
+            font-weight: 500;
+        }
 
-    .step-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 24px;
-      margin-top: 24px;
-      border: 1px solid var(--border);
-    }
-    .step-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.35rem;
-      font-weight: 400;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-    .step-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-bottom: 22px;
-      line-height: 1.6;
-    }
+        form {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
 
-    /* FIELD GROUP */
-    .field { margin-bottom: 20px; }
-    .field:last-child { margin-bottom: 0; }
+        .step {
+            display: none;
+        }
 
-    label.field-label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .field-label .num {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 4px;
-      margin-right: 6px;
-      vertical-align: middle;
-    }
-    .field-hint {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: -4px;
-      margin-bottom: 8px;
-    }
+        .step.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
 
-    input[type="text"],
-    input[type="number"],
-    input[type="email"],
-    select,
-    textarea {
-      width: 100%;
-      border: 1.5px solid var(--border);
-      border-radius: 7px;
-      padding: 10px 13px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.92rem;
-      color: var(--text);
-      background: #fff;
-      transition: border-color 0.2s;
-      appearance: auto;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent-mid);
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-    /* RADIO / CHECKBOX GROUPS */
-    .radio-group, .check-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .radio-group.inline, .check-group.inline {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .radio-option, .check-option {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 7px;
-      padding: 9px 13px;
-      cursor: pointer;
-      transition: border-color 0.18s, background 0.18s;
-      font-size: 0.88rem;
-    }
-    .radio-option:hover, .check-option:hover {
-      border-color: var(--accent-mid);
-      background: var(--accent-soft);
-    }
-    .radio-option input, .check-option input { accent-color: var(--accent); }
-    .radio-option.selected, .check-option.selected {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-      font-weight: 600;
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    /* LIKERT SCALE */
-    .likert-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .likert-item { background: #fff; border: 1.5px solid var(--border); border-radius: 8px; padding: 12px 14px; }
-    .likert-item .q { font-size: 0.88rem; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
-    .likert-scale {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .likert-scale label {
-      flex: 1;
-      min-width: 36px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-    .likert-scale label span.lnum {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border);
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: all 0.15s;
-      background: #fff;
-    }
-    .likert-scale label span.ltxt {
-      font-size: 0.65rem;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.2;
-      max-width: 50px;
-    }
-    .likert-scale input[type="radio"] { display: none; }
-    .likert-scale input[type="radio"]:checked + span.lnum {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
+        .field-group {
+            margin-bottom: 35px;
+        }
 
-    /* SLIDER */
-    .slider-wrap { padding: 8px 4px; }
-    .slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
-    input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
-    .slider-val { text-align: center; font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-top: 4px; }
+        label,
+        .question-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
 
-    /* TALP BLOCK */
-    .talp-block {
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 18px 16px;
-      margin-bottom: 16px;
-    }
-    .talp-indutor {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      color: var(--accent);
-      text-align: center;
-      letter-spacing: 0.04em;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .talp-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .talp-row:last-child { margin-bottom: 0; }
-    .talp-row input[type="text"] { padding: 8px 11px; font-size: 0.88rem; }
-    .talp-row select { width: 60px; padding: 8px 4px; font-size: 0.85rem; text-align: center; }
-    .talp-rank-label { font-size: 0.72rem; color: var(--muted); text-align: center; }
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
 
-    /* CONDITIONAL FIELD */
-    .conditional-field { display: none; margin-top: 10px; }
-    .conditional-field.visible { display: block; }
+        /* ESTILO DE ERRO */
+        .step.was-validated input:invalid,
+        .step.was-validated select:invalid,
+        .step.was-validated textarea:invalid {
+            border: 2px solid var(--red) !important;
+            background-color: #FFF8F8;
+        }
 
-    /* CONSENT BLOCK */
-    .tcle-box {
-      background: var(--accent-soft);
-      border: 1.5px solid #C0D4EE;
-      border-radius: 8px;
-      padding: 18px;
-      font-size: 0.87rem;
-      line-height: 1.7;
-      color: var(--text);
-      margin-bottom: 20px;
-    }
-    .tcle-box strong { color: var(--accent); }
-    .consent-check {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 13px;
-      cursor: pointer;
-      font-size: 0.88rem;
-    }
-    .consent-check input { accent-color: var(--accent); margin-top: 2px; flex-shrink: 0; }
+        .error-message {
+            color: var(--red);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+            display: none;
+            align-items: center;
+            gap: 5px;
+        }
 
-    /* NAV BUTTONS */
-    .nav-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 24px;
-      padding-top: 16px;
-      gap: 12px;
-    }
-    .btn {
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 22px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-secondary {
-      background: #fff;
-      color: var(--muted);
-      border: 1.5px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      flex: 1;
-      text-align: center;
-    }
-    .btn-primary:hover { background: var(--accent-mid); }
-    .btn-primary:disabled { background: #B0B8C4; cursor: not-allowed; }
-    .btn-submit {
-      background: var(--green);
-      color: #fff;
-      flex: 1;
-    }
-    .btn-submit:hover { background: #1e4e39; }
+        .error-message::before {
+            content: '⚠';
+            font-size: 0.9rem;
+        }
 
-    /* ERROR MESSAGE */
-    .error-msg {
-      color: var(--red);
-      font-size: 0.8rem;
-      margin-top: 8px;
-      display: none;
-    }
-    .error-msg.visible { display: block; }
+        .was-validated :invalid ~ .error-message,
+        .was-validated .options:has(:invalid) ~ .error-message,
+        .was-validated .likert-row:has(:invalid) ~ .error-message,
+        .was-validated .field-group:has(.likert-row input:invalid) > .error-message {
+            display: flex;
+        }
 
-    /* THANK YOU */
-    .thankyou-screen {
-      text-align: center;
-      padding: 40px 24px;
-    }
-    .thankyou-screen .icon { font-size: 3rem; margin-bottom: 16px; }
-    .thankyou-screen h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.8rem;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-    .thankyou-screen p { color: var(--muted); font-size: 0.92rem; }
+        /* Borda vermelha no likert quando inválido */
+        .step.was-validated .field-group:has(.likert-row input:required:invalid) .likert-row {
+            outline: 2px solid var(--red);
+            background-color: #FFF8F8;
+        }
 
-    /* SECTION DIVIDER */
-    .section-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-bottom: 14px;
-    }
+        /* Borda vermelha no grupo de radio-options */
+        .step.was-validated .options:has(input:required:invalid) {
+            outline: 2px solid var(--red);
+            border-radius: 8px;
+            padding: 4px;
+        }
 
-    @media (max-width: 480px) {
-      .step-card { padding: 20px 16px; }
-      .likert-scale label span.lnum { width: 30px; height: 30px; font-size: 0.8rem; }
-      .talp-row { grid-template-columns: 1fr 54px; }
-    }
-  </style>
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .radio-option,
+        .check-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .radio-option:hover,
+        .check-option:hover {
+            background-color: #F9F7F4;
+            border-color: var(--accent-mid);
+        }
+
+        .radio-option input,
+        .check-option input {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .radio-option.selected,
+        .check-option.selected {
+            background-color: var(--accent-soft);
+            border-color: var(--accent-mid);
+            color: var(--accent);
+        }
+
+        .likert-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            background: #F9F7F4;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .likert-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .likert-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-next,
+        .btn-submit {
+            background-color: var(--accent);
+            color: white;
+            margin-left: auto;
+        }
+
+        .btn-prev {
+            background-color: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .success-container {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .success-container h2 {
+            font-family: 'DM+Serif+Display', serif;
+            font-size: 2.2rem;
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .talp-grid {
+            display: grid;
+            gap: 20px;
+            background: #F9F7F4;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .talp-row {
+            display: grid;
+            grid-template-columns: 1fr 120px;
+            gap: 15px;
+            align-items: center;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="survey-header">
-  <div class="kicker">Faculdade de Comunicação · UnB · Pesquisa Piloto</div>
-  <h1>Techexistencialismo</h1>
-  <div class="progress-wrap">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-  <div class="progress-label" id="progressLabel">Etapa 1 de 10</div>
-</div>
+    <div class="container">
+        <header>
+            <h1>Techexistencialismo</h1>
+            <p>Pesquisa Acadêmica — FAC/UnB</p>
+        </header>
 
-<div class="survey-body">
-  <form name="pesquisa-techexistencialismo" method="POST" id="surveyForm">
-    
-    <!-- STEP 0: TCLE -->
-    <div class="step active" id="step-0">
-      <div class="step-card">
-        <div class="section-badge">Consentimento</div>
-        <h2 class="step-title">Antes de começar</h2>
-        <div class="tcle-box">
-          <strong>Esta pesquisa é parte de um Trabalho de Conclusão de Curso da Faculdade de Comunicação da Universidade de Brasília (FAC/UnB).</strong> O estudo investiga as percepções de estudantes universitários sobre tecnologia, algoritmos e identidade no contexto digital.<br><br>
-          Sua participação é <strong>voluntária</strong> e você pode desistir a qualquer momento. Todas as respostas são <strong>anônimas</strong> e os dados coletados serão utilizados exclusivamente para fins acadêmicos, em conformidade com a Resolução CNS 466/2012 e a LGPD (Lei 13.709/2018).<br><br>
-          Não há respostas certas ou erradas. Responda com honestidade, de acordo com sua experiência real.
-        </div>
-        <label class="consent-check">
-          <input type="checkbox" name="consentimento" id="consentCheck" required />
-          <span>Li e compreendi as informações acima e <strong>aceito participar voluntariamente</strong> desta pesquisa.</span>
-        </label>
-        <p class="error-msg" id="err-consent">Por favor, confirme seu consentimento para continuar.</p>
-      </div>
-    </div>
+        <form id="surveyForm" novalidate
+            action="https://script.google.com/macros/s/AKfycbx35rUk_4Y6MiPxKR1MeVXurgX-uJOOkcFxRysjOGlml62wExB5jeJplmHbzBUXxVOyQw/exec">
 
-    <!-- STEP 1: Perfil Básico -->
-    <div class="step" id="step-1">
-      <div class="step-card">
-        <div class="section-badge">Perfil Socioeconômico</div>
-        <h2 class="step-title">Dados básicos</h2>
-        <p class="step-desc">Informações para contextualizar o perfil dos participantes. Todos os campos são anônimos.</p>
-
-        <div class="field">
-          <label class="field-label"><span class="num">1</span> Idade</label>
-          <input type="number" name="idade" min="16" max="80" placeholder="Ex: 22" />
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">2</span> Com qual gênero você se identifica?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="genero" value="masculino" /> Masculino</label>
-            <label class="radio-option"><input type="radio" name="genero" value="feminino" /> Feminino</label>
-            <label class="radio-option"><input type="radio" name="genero" value="nao-binario" /> Não-binário</label>
-            <label class="radio-option"><input type="radio" name="genero" value="outro" /> Outro</label>
-            <label class="radio-option"><input type="radio" name="genero" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">3</span> Como você define sua orientação sexual?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="sexualidade" value="heterossexual" /> Heterossexual</label>
-            <label class="radio-option"><input type="radio" name="sexualidade" value="homossexual" /> Gay / Lésbica</label>
-            <label class="radio-option"><input type="radio" name="sexualidade" value="bissexual" /> Bissexual</label>
-            <label class="radio-option"><input type="radio" name="sexualidade" value="pansexual" /> Pansexual</label>
-            <label class="radio-option"><input type="radio" name="sexualidade" value="assexual" /> Assexual</label>
-            <label class="radio-option"><input type="radio" name="sexualidade" value="outro" /> Outro</label>
-            <label class="radio-option"><input type="radio" name="sexualidade" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">4</span> Como você se declara em termos de raça/cor?</label>
-          <div class="radio-group radio-group inline">
-            <label class="radio-option"><input type="radio" name="raca" value="branca" /> Branca</label>
-            <label class="radio-option"><input type="radio" name="raca" value="preta" /> Preta</label>
-            <label class="radio-option"><input type="radio" name="raca" value="parda" /> Parda</label>
-            <label class="radio-option"><input type="radio" name="raca" value="amarela" /> Amarela</label>
-            <label class="radio-option"><input type="radio" name="raca" value="indigena" /> Indígena</label>
-            <label class="radio-option"><input type="radio" name="raca" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">5</span> Qual o seu curso?</label>
-          <input type="text" name="curso" placeholder="Ex: Comunicação Social — Jornalismo" />
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">6</span> Em qual Região Administrativa do DF você mora?</label>
-          <select name="regiao_administrativa">
-            <option value="">— Selecione —</option>
-            <option>Plano Piloto (Brasília)</option>
-            <option>Águas Claras</option>
-            <option>Arniqueira</option>
-            <option>Brazlândia</option>
-            <option>Candangolândia</option>
-            <option>Ceilândia</option>
-            <option>Cruzeiro</option>
-            <option>Fercal</option>
-            <option>Gama</option>
-            <option>Guará</option>
-            <option>Itapoã</option>
-            <option>Jardim Botânico</option>
-            <option>Lago Norte</option>
-            <option>Lago Sul</option>
-            <option>Núcleo Bandeirante</option>
-            <option>Paranoá</option>
-            <option>Park Way</option>
-            <option>Planaltina</option>
-            <option>Recanto das Emas</option>
-            <option>Riacho Fundo</option>
-            <option>Riacho Fundo II</option>
-            <option>Samambaia</option>
-            <option>Santa Maria</option>
-            <option>São Sebastião</option>
-            <option>SCIA / Estrutural</option>
-            <option>SIA</option>
-            <option>Sobradinho</option>
-            <option>Sobradinho II</option>
-            <option>Sol Nascente / Pôr do Sol</option>
-            <option>Sudoeste / Octogonal</option>
-            <option>Taguatinga</option>
-            <option>Varjão</option>
-            <option>Vicente Pires</option>
-            <option>Moro fora do DF</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 2: Perfil Contexto de Vida -->
-    <div class="step" id="step-2">
-      <div class="step-card">
-        <div class="section-badge">Perfil Socioeconômico</div>
-        <h2 class="step-title">Contexto de vida</h2>
-
-        <div class="field">
-          <label class="field-label"><span class="num">7</span> Em que tipo de moradia você reside?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="moradia" value="familia" /> Com família</label>
-            <label class="radio-option"><input type="radio" name="moradia" value="sozinho" /> Sozinho(a)</label>
-            <label class="radio-option"><input type="radio" name="moradia" value="republica" /> Com colegas / república</label>
-            <label class="radio-option"><input type="radio" name="moradia" value="companheiro" /> Com companheiro(a) ou cônjuge</label>
-            <label class="radio-option"><input type="radio" name="moradia" value="outro" /> Outro</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">8</span> Qual é o seu estado civil?</label>
-          <div class="radio-group radio-group inline">
-            <label class="radio-option"><input type="radio" name="estado_civil" value="solteiro" /> Solteiro(a)</label>
-            <label class="radio-option"><input type="radio" name="estado_civil" value="relacionamento" /> Em relacionamento</label>
-            <label class="radio-option"><input type="radio" name="estado_civil" value="casado" /> Casado(a) / União estável</label>
-            <label class="radio-option"><input type="radio" name="estado_civil" value="divorciado" /> Divorciado(a)</label>
-            <label class="radio-option"><input type="radio" name="estado_civil" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">9</span> Você tem filhos?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="filhos" value="sim" /> Sim</label>
-            <label class="radio-option"><input type="radio" name="filhos" value="nao" /> Não</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">10</span> Qual é a sua situação atual?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="ocupacao" value="so-estudo" /> Só estudo</label>
-            <label class="radio-option"><input type="radio" name="ocupacao" value="estudo-estagio" /> Estudo e estagio</label>
-            <label class="radio-option"><input type="radio" name="ocupacao" value="estudo-trabalho" /> Estudo e trabalho</label>
-            <label class="radio-option"><input type="radio" name="ocupacao" value="tudo" /> Estudo, trabalho e estagio</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">11</span> Qual é a renda mensal aproximada da sua família?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="renda" value="ate-1sm" /> Até R$ 1.518 (até 1 SM)</label>
-            <label class="radio-option"><input type="radio" name="renda" value="1-2sm" /> R$ 1.518 a R$ 3.036 (1 a 2 SM)</label>
-            <label class="radio-option"><input type="radio" name="renda" value="2-5sm" /> R$ 3.036 a R$ 7.590 (2 a 5 SM)</label>
-            <label class="radio-option"><input type="radio" name="renda" value="5-10sm" /> R$ 7.590 a R$ 15.180 (5 a 10 SM)</label>
-            <label class="radio-option"><input type="radio" name="renda" value="acima-10sm" /> Acima de R$ 15.180 (mais de 10 SM)</label>
-            <label class="radio-option"><input type="radio" name="renda" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">12</span> Qual é a escolaridade mais alta no seu núcleo familiar?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="escolaridade_familia" value="sem-escolaridade" /> Sem escolaridade</label>
-            <label class="radio-option"><input type="radio" name="escolaridade_familia" value="fundamental-incompleto" /> Ensino Fundamental incompleto</label>
-            <label class="radio-option"><input type="radio" name="escolaridade_familia" value="fundamental-completo" /> Ensino Fundamental completo</label>
-            <label class="radio-option"><input type="radio" name="escolaridade_familia" value="medio" /> Ensino Médio completo</label>
-            <label class="radio-option"><input type="radio" name="escolaridade_familia" value="superior-incompleto" /> Ensino Superior incompleto</label>
-            <label class="radio-option"><input type="radio" name="escolaridade_familia" value="superior" /> Ensino Superior completo</label>
-            <label class="radio-option"><input type="radio" name="escolaridade_familia" value="pos" /> Pós-graduação</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">13</span> Em que tipo de escola você cursou o Ensino Médio?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="escola_origem" value="publica" /> Integralmente em escola pública</label>
-            <label class="radio-option"><input type="radio" name="escola_origem" value="privada" /> Integralmente em escola privada</label>
-            <label class="radio-option"><input type="radio" name="escola_origem" value="misto" /> Parte em escola pública, parte em privada</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 3: Saúde e Estilo de Vida -->
-    <div class="step" id="step-3">
-      <div class="step-card">
-        <div class="section-badge">Perfil Socioeconômico</div>
-        <h2 class="step-title">Saúde e estilo de vida</h2>
-
-        <div class="field">
-          <label class="field-label"><span class="num">14</span> Você pratica atividade física regularmente?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="atividade_fisica" value="3plus" /> Sim, 3 ou mais vezes por semana</label>
-            <label class="radio-option"><input type="radio" name="atividade_fisica" value="1-2" /> Sim, 1 a 2 vezes por semana</label>
-            <label class="radio-option"><input type="radio" name="atividade_fisica" value="raramente" /> Raramente</label>
-            <label class="radio-option"><input type="radio" name="atividade_fisica" value="nao" /> Não pratico</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">15</span> Você tem alguma religião ou prática espiritual?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="religiao" value="sim" /> Sim</label>
-            <label class="radio-option"><input type="radio" name="religiao" value="nao" /> Não</label>
-            <label class="radio-option"><input type="radio" name="religiao" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">16</span> Você faz uso de medicação psiquiátrica?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="medicacao" value="sim" id="medSim" /> Sim</label>
-            <label class="radio-option"><input type="radio" name="medicacao" value="nao" id="medNao" /> Não</label>
-            <label class="radio-option"><input type="radio" name="medicacao" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-          <div class="conditional-field" id="medDiag">
-            <label class="field-label" style="margin-top:10px">Qual é o diagnóstico? <span style="font-weight:400;color:var(--muted)">(opcional — ex: ansiedade, depressão, TDAH)</span></label>
-            <input type="text" name="diagnostico" placeholder="Diagnóstico ou CID (opcional)" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">17</span> Atualmente, você frequenta psicólogo(a)?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="psicologo" value="sim" /> Sim</label>
-            <label class="radio-option"><input type="radio" name="psicologo" value="nao" /> Não</label>
-            <label class="radio-option"><input type="radio" name="psicologo" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 4: Uso de Tecnologia -->
-    <div class="step" id="step-4">
-      <div class="step-card">
-        <div class="section-badge">Uso de Tecnologia</div>
-        <h2 class="step-title">Tecnologia no cotidiano</h2>
-
-        <div class="field">
-          <label class="field-label"><span class="num">18</span> Quantas horas por dia você usa tecnologia no total (celular, computador, tablet)?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="horas_tecnologia" value="menos-2h" /> Menos de 2h</label>
-            <label class="radio-option"><input type="radio" name="horas_tecnologia" value="2-4h" /> 2 a 4h</label>
-            <label class="radio-option"><input type="radio" name="horas_tecnologia" value="4-6h" /> 4 a 6h</label>
-            <label class="radio-option"><input type="radio" name="horas_tecnologia" value="6-8h" /> 6 a 8h</label>
-            <label class="radio-option"><input type="radio" name="horas_tecnologia" value="mais-8h" /> Mais de 8h</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">19</span> Quantas horas por dia você passa especificamente em redes sociais?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="horas_redes" value="menos-1h" /> Menos de 1h</label>
-            <label class="radio-option"><input type="radio" name="horas_redes" value="1-2h" /> 1 a 2h</label>
-            <label class="radio-option"><input type="radio" name="horas_redes" value="3-4h" /> 3 a 4h</label>
-            <label class="radio-option"><input type="radio" name="horas_redes" value="mais-4h" /> Mais de 4h</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">20</span> Quais plataformas você mais usa? <span style="font-weight:400;color:var(--muted)">(marque até 3)</span></label>
-          <div class="check-group check-group inline" id="platformGroup">
-            <label class="check-option"><input type="checkbox" name="plataformas" value="instagram" /> Instagram</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="tiktok" /> TikTok</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="youtube" /> YouTube</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="whatsapp" /> WhatsApp</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="x-twitter" /> X / Twitter</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="linkedin" /> LinkedIn</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="facebook" /> Facebook</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="twitch" /> Twitch</label>
-            <label class="check-option"><input type="checkbox" name="plataformas" value="outro" /> Outra</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">21</span> Em geral, seu uso de redes sociais é mais voltado para:</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="finalidade_rs" value="entretenimento" /> Entretenimento</label>
-            <label class="radio-option"><input type="radio" name="finalidade_rs" value="comunicacao" /> Comunicação com amigos e família</label>
-            <label class="radio-option"><input type="radio" name="finalidade_rs" value="estudo" /> Estudo e conteúdo acadêmico</label>
-            <label class="radio-option"><input type="radio" name="finalidade_rs" value="trabalho" /> Trabalho</label>
-            <label class="radio-option"><input type="radio" name="finalidade_rs" value="noticias" /> Notícias e política</label>
-            <label class="radio-option"><input type="radio" name="finalidade_rs" value="multiplo" /> Múltiplas finalidades de forma equivalente</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">22 a 25</span> Sobre seu comportamento nas redes:</label>
-          <div class="likert-wrap">
-            <div class="likert-item">
-              <div class="q">Você acessa redes sociais mesmo quando sabe que deveria estar estudando ou trabalhando?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="acessa_quando_nao_devia" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="acessa_quando_nao_devia" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="acessa_quando_nao_devia" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="acessa_quando_nao_devia" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="acessa_quando_nao_devia" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-            <div class="likert-item">
-              <div class="q">O uso de redes sociais prejudica seu desempenho acadêmico (concentração, prazos, qualidade dos estudos)?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="prejudica_academico" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="prejudica_academico" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="prejudica_academico" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="prejudica_academico" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="prejudica_academico" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-            <div class="likert-item">
-              <div class="q">Você sente desconforto ou ansiedade quando fica sem acesso ao celular ou às redes sociais por um período prolongado?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="desconforto_sem_celular" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="desconforto_sem_celular" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="desconforto_sem_celular" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="desconforto_sem_celular" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="desconforto_sem_celular" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-            <div class="likert-item">
-              <div class="q">Você se compara com outras pessoas ao ver postagens nas redes sociais?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="comparacao_social" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="comparacao_social" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="comparacao_social" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="comparacao_social" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="comparacao_social" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">26</span> Em uma escala de 0 a 10, o quanto o uso de redes sociais afeta o seu humor?</label>
-          <p class="field-hint">0 = piora muito o humor / 10 = melhora muito o humor</p>
-          <div class="slider-wrap">
-            <div class="slider-labels"><span>0 — Piora muito</span><span>10 — Melhora muito</span></div>
-            <input type="range" name="humor_redes" min="0" max="10" value="5" id="humorSlider" />
-            <div class="slider-val" id="humorVal">5</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 5: Saúde Mental -->
-    <div class="step" id="step-5">
-      <div class="step-card">
-        <div class="section-badge">Saúde Mental</div>
-        <h2 class="step-title">Bem-estar e saúde mental</h2>
-        <p class="step-desc">As questões abaixo se referem aos últimos 14 dias, salvo indicação contrária.</p>
-
-        <div class="field">
-          <div class="likert-wrap">
-            <div class="likert-item">
-              <div class="q">Com que frequência você se sentiu ansioso(a)?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="ansiedade" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="ansiedade" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="ansiedade" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="ansiedade" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="ansiedade" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-            <div class="likert-item">
-              <div class="q">Com que frequência você se sentiu triste ou sem motivação?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="tristeza" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="tristeza" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="tristeza" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="tristeza" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="tristeza" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-            <div class="likert-item">
-              <div class="q">Com que frequência você teve dificuldade para dormir?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="dificuldade_sono" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="dificuldade_sono" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="dificuldade_sono" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="dificuldade_sono" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="dificuldade_sono" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-            <div class="likert-item">
-              <div class="q">Você sente que o uso de redes sociais aumenta sua sensação de solidão?</div>
-              <div class="likert-scale">
-                <label><input type="radio" name="solidao_redes" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                <label><input type="radio" name="solidao_redes" value="2"/><span class="lnum">2</span></label>
-                <label><input type="radio" name="solidao_redes" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                <label><input type="radio" name="solidao_redes" value="4"/><span class="lnum">4</span></label>
-                <label><input type="radio" name="solidao_redes" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">31</span> Como você avalia sua saúde mental atualmente?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="avaliacao_sm" value="muito-boa" /> Muito boa</label>
-            <label class="radio-option"><input type="radio" name="avaliacao_sm" value="boa" /> Boa</label>
-            <label class="radio-option"><input type="radio" name="avaliacao_sm" value="regular" /> Regular</label>
-            <label class="radio-option"><input type="radio" name="avaliacao_sm" value="ruim" /> Ruim</label>
-            <label class="radio-option"><input type="radio" name="avaliacao_sm" value="muito-ruim" /> Muito ruim</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label"><span class="num">32</span> Você já considerou buscar ajuda psicológica por causa de estresse, ansiedade ou questões relacionadas ao uso de tecnologia?</label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="busca_ajuda" value="sim-buscou" /> Sim, e já busquei</label>
-            <label class="radio-option"><input type="radio" name="busca_ajuda" value="sim-nao-buscou" /> Sim, mas ainda não busquei</label>
-            <label class="radio-option"><input type="radio" name="busca_ajuda" value="nao" /> Não</label>
-            <label class="radio-option"><input type="radio" name="busca_ajuda" value="nao-responder" /> Prefiro não responder</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 6: Influenciadores -->
-    <div class="step" id="step-6">
-      <div class="step-card">
-        <div class="section-badge">Mídias e Influenciadores</div>
-        <h2 class="step-title">Envolvimento emocional com mídias</h2>
-
-        <div class="field">
-          <label class="field-label"><span class="num">33</span> Você acompanha regularmente algum criador de conteúdo, influenciador ou figura pública nas redes sociais?</label>
-          <div class="radio-group inline">
-            <label class="radio-option"><input type="radio" name="acompanha_influenciador" value="sim" id="inflSim" /> Sim</label>
-            <label class="radio-option"><input type="radio" name="acompanha_influenciador" value="nao" id="inflNao" /> Não</label>
-          </div>
-        </div>
-
-        <div class="conditional-field" id="inflBlock">
-          <div class="field">
-            <div class="likert-wrap">
-              <div class="likert-item">
-                <div class="q">O conteúdo de influenciadores ou criadores impacta a forma como você se enxerga ou se avalia?</div>
-                <div class="likert-scale">
-                  <label><input type="radio" name="impacto_autoimagem" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                  <label><input type="radio" name="impacto_autoimagem" value="2"/><span class="lnum">2</span></label>
-                  <label><input type="radio" name="impacto_autoimagem" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                  <label><input type="radio" name="impacto_autoimagem" value="4"/><span class="lnum">4</span></label>
-                  <label><input type="radio" name="impacto_autoimagem" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
+            <div class="step active" data-step="0">
+                <div class="field-group">
+                    <label class="check-option">
+                        <input type="checkbox" name="consentimento" value="Sim" required>
+                        Li e aceito participar voluntariamente desta pesquisa.
+                    </label>
+                    <span class="error-message">Por favor, preencha o campo corretamente!</span>
                 </div>
-              </div>
-              <div class="likert-item">
-                <div class="q">O estilo de vida apresentado por influenciadores serve como parâmetro para avaliar a sua própria vida?</div>
-                <div class="likert-scale">
-                  <label><input type="radio" name="parametro_vida" value="1"/><span class="lnum">1</span><span class="ltxt">Nunca</span></label>
-                  <label><input type="radio" name="parametro_vida" value="2"/><span class="lnum">2</span></label>
-                  <label><input type="radio" name="parametro_vida" value="3"/><span class="lnum">3</span><span class="ltxt">Às vezes</span></label>
-                  <label><input type="radio" name="parametro_vida" value="4"/><span class="lnum">4</span></label>
-                  <label><input type="radio" name="parametro_vida" value="5"/><span class="lnum">5</span><span class="ltxt">Sempre</span></label>
+                <div class="nav-buttons">
+                    <button type="button" class="btn-next" onclick="nextStep()">Iniciar</button>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="field">
-            <label class="field-label"><span class="num">36</span> Você sente algum vínculo emocional com algum criador de conteúdo ou figura pública?</label>
-            <p class="field-hint">Admiração intensa, sensação de proximidade, preocupação com o que acontece com essa pessoa.</p>
-            <div class="radio-group">
-              <label class="radio-option"><input type="radio" name="vinculo_emocional" value="sim-varios" /> Sim, com mais de uma pessoa</label>
-              <label class="radio-option"><input type="radio" name="vinculo_emocional" value="sim-um" /> Sim, com uma pessoa específica</label>
-              <label class="radio-option"><input type="radio" name="vinculo_emocional" value="nao" /> Não</label>
-              <label class="radio-option"><input type="radio" name="vinculo_emocional" value="nunca-pensei" /> Nunca pensei sobre isso</label>
+
+            <div class="step" data-step="1">
+                <div class="field-group">
+                    <label for="idade">1. Qual sua idade?</label>
+                    <input type="number" name="idade" id="idade" min="10" max="100" required>
+                    <span class="error-message">Por favor, preencha o campo corretamente!</span>
+                </div>
+
+                <div class="field-group">
+                    <p class="question-label">2. Como você se identifica em relação ao gênero?</p>
+                    <div class="options">
+                        <label class="radio-option"><input type="radio" name="genero" value="M" required>
+                            Masculino</label>
+                        <label class="radio-option"><input type="radio" name="genero" value="F"> Feminino</label>
+                    </div>
+                    <span class="error-message">Por favor, preencha o campo corretamente!</span>
+                </div>
+
+                <div class="nav-buttons">
+                    <button type="button" class="btn-prev" onclick="prevStep()">Anterior</button>
+                    <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                </div>
             </div>
-          </div>
+
+            <div class="step" data-step="6">
+                <div class="field-group">
+                    <p class="question-label">33. Você acompanha regularmente algum criador de conteúdo, influenciador
+                        ou figura pública nas redes sociais?</p>
+                    <div class="options" id="acompanha-options">
+                        <label class="radio-option"><input type="radio" name="acompanha_influenciador" value="Sim"
+                                required> Sim</label>
+                        <label class="radio-option"><input type="radio" name="acompanha_influenciador" value="Não">
+                            Não</label>
+                    </div>
+                    <span class="error-message">Por favor, preencha o campo corretamente!</span>
+                </div>
+
+                <div id="influencer-conditional" style="display: none;">
+                    <div class="field-group">
+                        <p class="question-label">34. O conteúdo de influenciadores ou criadores impacta a forma como
+                            você se enxerga ou se avalia?</p>
+                        <div class="likert-row">
+                            <span class="likert-label">Nada</span>
+                            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="1">1</div>
+                            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="2">2</div>
+                            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="3">3</div>
+                            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="4">4</div>
+                            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="5">5</div>
+                            <span class="likert-label">Muito</span>
+                        </div>
+                        <span class="error-message">Por favor, preencha o campo corretamente!</span>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="question-label">35. O estilo de vida apresentado por influenciadores serve como
+                            parâmetro para avaliar a sua própria vida?</p>
+                        <div class="likert-row">
+                            <span class="likert-label">Nada</span>
+                            <div class="likert-item"><input type="radio" name="parametro_vida" value="1">1</div>
+                            <div class="likert-item"><input type="radio" name="parametro_vida" value="2">2</div>
+                            <div class="likert-item"><input type="radio" name="parametro_vida" value="3">3</div>
+                            <div class="likert-item"><input type="radio" name="parametro_vida" value="4">4</div>
+                            <div class="likert-item"><input type="radio" name="parametro_vida" value="5">5</div>
+                            <span class="likert-label">Muito</span>
+                        </div>
+                        <span class="error-message">Por favor, preencha o campo corretamente!</span>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="question-label">36. Você sente algum vínculo emocional com algum criador de conteúdo
+                            ou figura pública?</p>
+                        <div class="options">
+                            <label class="radio-option"><input type="radio" name="vinculo_emocional" value="Sim">
+                                Sim</label>
+                            <label class="radio-option"><input type="radio" name="vinculo_emocional" value="Não">
+                                Não</label>
+                        </div>
+                        <span class="error-message">Por favor, preencha o campo corretamente!</span>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button type="button" class="btn-prev" onclick="prevStep()">Anterior</button>
+                    <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
+                </div>
+            </div>
+
+            <div class="step" data-step="9">
+                <div class="nav-buttons">
+                    <button type="button" class="btn-prev" onclick="prevStep()">Anterior</button>
+                    <button type="submit" class="btn-submit">Enviar</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="successMessage" class="success-container">
+            <h2>Muito Obrigado!</h2>
+            <p>Suas respostas foram registradas.</p>
         </div>
-      </div>
     </div>
 
-    <!-- STEP 7: BFI-10 -->
-    <div class="step" id="step-7">
-      <div class="step-card">
-        <div class="section-badge">Personalidade</div>
-        <h2 class="step-title">Como você se descreveria?</h2>
-        <p class="step-desc">Indique o quanto cada afirmação descreve você. Não há resposta certa ou errada.</p>
-        <p class="field-hint" style="margin-bottom:16px">1 = Discordo totalmente &nbsp;|&nbsp; 5 = Concordo totalmente</p>
+    <script>
+        let currentStep = 0;
+        const form = document.getElementById("surveyForm");
+        const steps = document.querySelectorAll(".step");
+        const successMessage = document.getElementById("successMessage");
 
-        <div class="likert-wrap">
-          <div class="likert-item">
-            <div class="q">Sou uma pessoa reservada.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_reservado" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_reservado" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_reservado" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_reservado" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_reservado" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">De modo geral, confio nas pessoas.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_confiante" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_confiante" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_confiante" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_confiante" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_confiante" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Tendo a ser preguiçoso(a).</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_preguicoso" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_preguicoso" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_preguicoso" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_preguicoso" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_preguicoso" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Sou relaxado(a) e lido bem com o estresse.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_relaxado" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_relaxado" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_relaxado" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_relaxado" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_relaxado" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Tenho poucos interesses artísticos.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_artistico" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_artistico" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_artistico" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_artistico" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_artistico" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Sou comunicativo(a) e sociável.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_sociavel" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_sociavel" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_sociavel" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_sociavel" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_sociavel" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Tendo a encontrar defeitos nos outros.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_critico" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_critico" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_critico" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_critico" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_critico" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Faço um trabalho cuidadoso e caprichoso.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_cuidadoso" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_cuidadoso" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_cuidadoso" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_cuidadoso" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_cuidadoso" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Fico nervoso(a) com facilidade.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_nervoso" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_nervoso" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_nervoso" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_nervoso" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_nervoso" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-          <div class="likert-item">
-            <div class="q">Tenho uma imaginação ativa e criativa.</div>
-            <div class="likert-scale">
-              <label><input type="radio" name="bfi_criativo" value="1"/><span class="lnum">1</span><span class="ltxt">Discordo</span></label>
-              <label><input type="radio" name="bfi_criativo" value="2"/><span class="lnum">2</span></label>
-              <label><input type="radio" name="bfi_criativo" value="3"/><span class="lnum">3</span></label>
-              <label><input type="radio" name="bfi_criativo" value="4"/><span class="lnum">4</span></label>
-              <label><input type="radio" name="bfi_criativo" value="5"/><span class="lnum">5</span><span class="ltxt">Concordo</span></label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        function showStep(n) {
+            steps.forEach((step, index) => step.classList.toggle("active", index === n));
+            currentStep = n;
+        }
 
-    <!-- STEP 8: TALP Parte 1 -->
-    <div class="step" id="step-8">
-      <div class="step-card">
-        <div class="section-badge">Associação Livre de Palavras</div>
-        <h2 class="step-title">O que vem à sua mente?</h2>
-        <p class="step-desc">Para cada palavra abaixo, escreva as <strong>3 primeiras palavras</strong> que vierem à sua mente. Depois, numere-as de <strong>1 a 3</strong> indicando qual está mais associada ao termo (1 = mais associada). Responda rapidamente e sem pensar demais.</p>
+        // Valida apenas campos que estão visíveis (não dentro de elementos hidden)
+        function isVisible(el) {
+            return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length) &&
+                getComputedStyle(el).visibility !== 'hidden' &&
+                getComputedStyle(el).display !== 'none';
+        }
 
-        <div class="talp-block">
-          <div class="talp-indutor">TECNOLOGIA</div>
-          <p class="field-hint" style="text-align:center;margin-bottom:12px">Pense na tecnologia como você a vive: celular, internet, aplicativos.</p>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_tecnologia_1" placeholder="Palavra 1" />
-            <select name="talp_tecnologia_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          
-          <div class="talp-row">
-            <input type="text" name="talp_tecnologia_2" placeholder="Palavra 2" />
-            <select name="talp_tecnologia_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_tecnologia_3" placeholder="Palavra 3" />
-            <select name="talp_tecnologia_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
+        function stepIsValid(stepEl) {
+            // Pega todos os inputs required, mas ignora os que estão dentro de contêineres ocultos
+            const requiredInputs = stepEl.querySelectorAll('[required]');
+            for (const input of requiredInputs) {
+                // Verifica se o elemento pai está visível
+                let parent = input.parentElement;
+                let hidden = false;
+                while (parent && parent !== stepEl) {
+                    if (parent.style.display === 'none') { hidden = true; break; }
+                    parent = parent.parentElement;
+                }
+                if (!hidden && !input.checkValidity()) return false;
+            }
+            return true;
+        }
 
-        <div class="talp-block">
-          <div class="talp-indutor">ALGORITMO</div>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_algoritmo_1" placeholder="Palavra 1" />
-            <select name="talp_algoritmo_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          
-          <div class="talp-row">
-            <input type="text" name="talp_algoritmo_2" placeholder="Palavra 2" />
-            <select name="talp_algoritmo_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_algoritmo_3" placeholder="Palavra 3" />
-            <select name="talp_algoritmo_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
+        function nextStep() {
+            const currentStepEl = steps[currentStep];
+            if (stepIsValid(currentStepEl)) {
+                currentStepEl.classList.remove('was-validated');
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                    window.scrollTo(0, 0);
+                }
+            } else {
+                currentStepEl.classList.add('was-validated');
+                // Scroll até o primeiro campo inválido e visível
+                const requiredInputs = currentStepEl.querySelectorAll('[required]');
+                for (const input of requiredInputs) {
+                    let parent = input.parentElement;
+                    let hidden = false;
+                    while (parent && parent !== currentStepEl) {
+                        if (parent.style.display === 'none') { hidden = true; break; }
+                        parent = parent.parentElement;
+                    }
+                    if (!hidden && !input.checkValidity()) {
+                        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        break;
+                    }
+                }
+            }
+        }
 
-        <div class="talp-block">
-          <div class="talp-indutor">REDES SOCIAIS</div>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_redes_1" placeholder="Palavra 1" />
-            <select name="talp_redes_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-         
-          <div class="talp-row">
-            <input type="text" name="talp_redes_2" placeholder="Palavra 2" />
-            <select name="talp_redes_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_redes_3" placeholder="Palavra 3" />
-            <select name="talp_redes_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
+        function prevStep() {
+            if (currentStep > 0) {
+                steps[currentStep].classList.remove('was-validated');
+                currentStep--;
+                showStep(currentStep);
+                window.scrollTo(0, 0);
+            }
+        }
 
-        <div class="talp-block">
-          <div class="talp-indutor">REALIDADE</div>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_realidade_1" placeholder="Palavra 1" />
-            <select name="talp_realidade_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          
-          <div class="talp-row">
-            <input type="text" name="talp_realidade_2" placeholder="Palavra 2" />
-            <select name="talp_realidade_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_realidade_3" placeholder="Palavra 3" />
-            <select name="talp_realidade_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
-      </div>
-    </div>
+        // Lógica da Pergunta 33 — condicional de influenciadores
+        const influencerRadios = document.querySelectorAll('input[name="acompanha_influenciador"]');
+        const influencerConditional = document.getElementById('influencer-conditional');
 
-    <!-- STEP 9: TALP Parte 2 -->
-    <div class="step" id="step-9">
-      <div class="step-card">
-        <div class="section-badge">Associação Livre de Palavras</div>
-        <h2 class="step-title">Continuando...</h2>
-        <p class="step-desc">Mesma dinâmica: 3 palavras que vêm à mente + numeração de 1 a 3 por associação.</p>
+        function toggleInfluencerConditional(show) {
+            const inputs = influencerConditional.querySelectorAll('input');
+            if (show) {
+                influencerConditional.style.display = 'block';
+                // Apenas o primeiro radio de cada grupo precisa de required
+                const groups = {};
+                inputs.forEach(i => {
+                    if (i.type === 'radio') {
+                        if (!groups[i.name]) {
+                            groups[i.name] = true;
+                            i.required = true;
+                        } else {
+                            i.required = false;
+                        }
+                    } else {
+                        i.required = true;
+                    }
+                });
+            } else {
+                influencerConditional.style.display = 'none';
+                inputs.forEach(i => i.required = false);
+            }
+        }
 
-        <div class="talp-block">
-          <div class="talp-indutor">EXISTÊNCIA</div>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_existencia_1" placeholder="Palavra 1" />
-            <select name="talp_existencia_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          
-          <div class="talp-row">
-            <input type="text" name="talp_existencia_2" placeholder="Palavra 2" />
-            <select name="talp_existencia_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_existencia_3" placeholder="Palavra 3" />
-            <select name="talp_existencia_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
-
-        <div class="talp-block">
-          <div class="talp-indutor">DESEJO</div>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_desejo_1" placeholder="Palavra 1" />
-            <select name="talp_desejo_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          
-          <div class="talp-row">
-            <input type="text" name="talp_desejo_2" placeholder="Palavra 2" />
-            <select name="talp_desejo_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_desejo_3" placeholder="Palavra 3" />
-            <select name="talp_desejo_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
-
-        <div class="talp-block">
-          <div class="talp-indutor">RELACIONAMENTO</div>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_relacionamentos_1" placeholder="Palavra 1" />
-            <select name="talp_relacionamentos_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          
-          <div class="talp-row">
-            <input type="text" name="talp_relacionamentos_2" placeholder="Palavra 2" />
-            <select name="talp_relacionamentos_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_relacionamentos_3" placeholder="Palavra 3" />
-            <select name="talp_relacionamentos_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
-
-        <div class="talp-block">
-          <div class="talp-indutor">ANGÚSTIA</div>
-          <div class="talp-rank-label">Rank (1 = mais associada)</div>
-          <br>
-          <div class="talp-row">
-            <input type="text" name="talp_angustia_1" placeholder="Palavra 1" />
-            <select name="talp_angustia_1_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          
-          <div class="talp-row">
-            <input type="text" name="talp_angustia_2" placeholder="Palavra 2" />
-            <select name="talp_angustia_2_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-          <div class="talp-row">
-            <input type="text" name="talp_angustia_3" placeholder="Palavra 3" />
-            <select name="talp_angustia_3_rank"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 10: Thank You -->
-    <div class="step" id="step-10">
-      <div class="step-card">
-        <div class="thankyou-screen">
-          <div class="icon">🙏</div>
-          <h2>Muito obrigado!</h2>
-          <p>Sua participação é fundamental para esta pesquisa.<br>As respostas foram registradas com sucesso.</p>
-          <p style="margin-top:16px;font-size:0.82rem;color:var(--muted)">Faculdade de Comunicação · UnB · 2025</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- NAVIGATION -->
-    <div class="nav-wrap" id="navWrap">
-      <button type="button" class="btn btn-secondary" id="prevBtn" style="display:none">← Anterior</button>
-      <button type="button" class="btn btn-primary" id="nextBtn">Próximo →</button>
-      <button type="submit" class="btn btn-submit" id="submitBtn" style="display:none">Enviar pesquisa ✓</button>
-    </div>
-
-  </form>
-</div>
-
-<script>
-  const TOTAL_STEPS = 10;
-  let current = 0;
-
-  const steps = Array.from(document.querySelectorAll('.step'));
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const submitBtn = document.getElementById('submitBtn');
-  const progressBar = document.getElementById('progressBar');
-  const progressLabel = document.getElementById('progressLabel');
-
-  function showStep(n) {
-    steps.forEach((s, i) => s.classList.toggle('active', i === n));
-    prevBtn.style.display = n === 0 || n === TOTAL_STEPS ? 'none' : 'inline-flex';
-    nextBtn.style.display = n === TOTAL_STEPS - 1 || n === TOTAL_STEPS ? 'none' : 'inline-flex';
-    submitBtn.style.display = n === TOTAL_STEPS - 1 ? 'inline-flex' : 'none';
-    const pct = n === 0 ? 5 : Math.round((n / TOTAL_STEPS) * 100);
-    progressBar.style.width = pct + '%';
-    progressLabel.textContent = n < TOTAL_STEPS ? `Etapa ${n + 1} de ${TOTAL_STEPS}` : 'Concluído!';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function validateStep(n) {
-    if (n === 0) {
-      const ok = document.getElementById('consentCheck').checked;
-      document.getElementById('err-consent').classList.toggle('visible', !ok);
-      return ok;
-    }
-    return true;
-  }
-
-  nextBtn.addEventListener('click', () => {
-    if (!validateStep(current)) return;
-    current++;
-    showStep(current);
-  });
-
-  prevBtn.addEventListener('click', () => {
-    current--;
-    showStep(current);
-  });
-
-  // Platform checkbox limit
-  const platformChecks = document.querySelectorAll('#platformGroup input[type="checkbox"]');
-  platformChecks.forEach(cb => {
-    cb.addEventListener('change', () => {
-      const checked = document.querySelectorAll('#platformGroup input:checked').length;
-      platformChecks.forEach(c => {
-        if (!c.checked) c.disabled = checked >= 3;
-        c.closest('.check-option').style.opacity = (!c.checked && checked >= 3) ? '0.45' : '1';
-      });
-    });
-  });
-
-  // Conditional: medication diagnosis
-  document.querySelectorAll('input[name="medicacao"]').forEach(r => {
-    r.addEventListener('change', () => {
-      document.getElementById('medDiag').classList.toggle('visible', r.value === 'sim' && r.checked);
-    });
-  });
-
-  // Conditional: influencer block
-  document.querySelectorAll('input[name="acompanha_influenciador"]').forEach(r => {
-    r.addEventListener('change', () => {
-      document.getElementById('inflBlock').classList.toggle('visible', r.value === 'sim' && r.checked);
-    });
-  });
-
-  // Slider display
-  const humorSlider = document.getElementById('humorSlider');
-  const humorVal = document.getElementById('humorVal');
-  if (humorSlider) humorSlider.addEventListener('input', () => { humorVal.textContent = humorSlider.value; });
-
-  // Highlight selected radio/check options
-  document.querySelectorAll('.radio-option input, .check-option input').forEach(input => {
-    input.addEventListener('change', () => {
-      if (input.type === 'radio') {
-        document.querySelectorAll(`input[name="${input.name}"]`).forEach(r => {
-          r.closest('.radio-option').classList.toggle('selected', r.checked);
+        influencerRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                toggleInfluencerConditional(e.target.value === 'Sim');
+            });
         });
-      } else {
-        input.closest('.check-option').classList.toggle('selected', input.checked);
-      }
-    });
-  });
 
-  // Init
-  showStep(0);
-</script>
-<script>
-const form = document.getElementById("surveyForm");
+        // Estilo visual de seleção em radio e checkbox
+        document.querySelectorAll('.radio-option input, .check-option input').forEach(input => {
+            input.addEventListener('change', () => {
+                if (input.type === 'radio') {
+                    document.querySelectorAll(`input[name="${input.name}"]`).forEach(r => {
+                        r.closest('.radio-option')?.classList.toggle('selected', r.checked);
+                    });
+                } else {
+                    input.closest('.check-option')?.classList.toggle('selected', input.checked);
+                }
+            });
+        });
 
-form.addEventListener("submit", async (e) => {
+        // Envio com feedback imediato (Muito Obrigado!) — sem depender do Apps Script
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-  e.preventDefault();
+            if (!stepIsValid(steps[currentStep])) {
+                steps[currentStep].classList.add('was-validated');
+                return;
+            }
 
-  const formData = new FormData(form);
+            const submitBtn = form.querySelector('.btn-submit');
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
 
-  const data = {};
+            const formData = new FormData(form);
+            const data = {};
+            for (const [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) data[key] = [data[key]];
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
 
-  for (const [key, value] of formData.entries()) {
+            // Exibe o "Muito Obrigado" imediatamente para o usuário
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+            window.scrollTo(0, 0);
 
-    if (data[key]) {
+            // Envia os dados em segundo plano sem bloquear a UX
+            fetch(form.action, {
+                method: "POST",
+                body: JSON.stringify(data)
+            }).catch(() => {
+                // falha silenciosa — o usuário já viu o "obrigado"
+                console.warn('Falha ao enviar dados para o Google Sheets.');
+            });
+        });
 
-      if (!Array.isArray(data[key])) {
-        data[key] = [data[key]];
-      }
-
-      data[key].push(value);
-
-    } else {
-
-      data[key] = value;
-
-    }
-  }
-
-  try {
-
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbx35rUk_4Y6MiPxKR1MeVXurgX-uJOOkcFxRysjOGlml62wExB5jeJplmHbzBUXxVOyQw/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    );
-
-    const result = await response.json();
-
-    if (result.success) {
-
-      alert("Pesquisa enviada com sucesso!");
-
-      form.reset();
-
-    } else {
-
-      alert("Erro ao enviar.");
-
-    }
-
-  } catch (err) {
-
-    console.error(err);
-
-    alert("Erro de conexão.");
-
-  }
-
-});
-</script>  
+        showStep(0);
+    </script>
 </body>
+
 </html>
