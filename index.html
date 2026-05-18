@@ -687,8 +687,11 @@
                             mora?</label>
                         <select name="regiao_administrativa">
                             <option value="">— Selecione —</option>
-                            <option>Plano Piloto (Brasília)</option>
+                            <option>Asa Norte</option>
+                            <option>Asa Sul</option>
+                            <option>Água Quente</option>
                             <option>Águas Claras</option>
+                            <option>Arapoanga</option>
                             <option>Arniqueira</option>
                             <option>Brazlândia</option>
                             <option>Candangolândia</option>
@@ -696,30 +699,37 @@
                             <option>Cruzeiro</option>
                             <option>Fercal</option>
                             <option>Gama</option>
-                            <option>Guará</option>
+                            <option>Guará I</option>
+                            <option>Guará II</option>
                             <option>Itapoã</option>
                             <option>Jardim Botânico</option>
                             <option>Lago Norte</option>
                             <option>Lago Sul</option>
+                            <option>Mestre D'Armas</option>
+                            <option>Noroeste</option>
                             <option>Núcleo Bandeirante</option>
+                            <option>Octogonal</option>
                             <option>Paranoá</option>
                             <option>Park Way</option>
                             <option>Planaltina</option>
+                            <option>Pôr do Sol</option>
                             <option>Recanto das Emas</option>
-                            <option>Riacho Fundo</option>
+                            <option>Riacho Fundo I</option>
                             <option>Riacho Fundo II</option>
                             <option>Samambaia</option>
                             <option>Santa Maria</option>
                             <option>São Sebastião</option>
                             <option>SCIA / Estrutural</option>
                             <option>SIA</option>
-                            <option>Sobradinho</option>
+                            <option>Sobradinho I</option>
                             <option>Sobradinho II</option>
                             <option>Sol Nascente / Pôr do Sol</option>
                             <option>Sudoeste / Octogonal</option>
                             <option>Taguatinga</option>
                             <option>Varjão</option>
                             <option>Vicente Pires</option>
+                            <option>Vila Planalto</option>
+                            <option>Vila Telebrasília</option>
                             <option>Moro fora do DF</option>
                         </select>
                         <p class="error-msg" id="err-regiao">⚠ Por favor, selecione sua região.</p>
@@ -728,239 +738,245 @@
             </div>
 
             <!-- STEP 2: TALP Parte 1 -->
-    <div class="step" id="step-2">
-        <div class="step-card">
-            <div class="section-badge">Associação Livre de Palavras</div>
-            <h2 class="step-title">O que vem à sua mente?</h2>
-            <p class="step-desc">Para cada palavra abaixo, escreva as <strong>3 primeiras palavras</strong> que
-                vierem à sua mente. Depois, numere-as de <strong>1 a 3</strong> indicando qual está mais
-                associada ao termo (1 = mais associada). Responda rapidamente e sem pensar demais.</p>
+            <div class="step" id="step-2">
+                <div class="step-card">
+                    <div class="section-badge">Associação Livre de Palavras</div>
+                    <h2 class="step-title">O que vem à sua mente?</h2>
+                    <p class="step-desc">Para cada palavra abaixo, escreva as <strong>3 primeiras palavras</strong> que
+                        vierem à sua mente. Depois, numere-as de <strong>1 a 3</strong> indicando qual está mais
+                        associada ao termo (1 = mais associada). Responda rapidamente e sem pensar demais.</p>
 
-            <div class="talp-block">
-                <div class="talp-indutor">TECNOLOGIA</div>
-                <p class="field-hint" style="text-align:center;margin-bottom:12px">Pense na tecnologia como você
-                    a vive: celular, internet, aplicativos.</p>
-                <div class="talp-rank-label">Rank (1 = mais associada)</div>
-                <br>
-                <div class="talp-row">
-                    <input type="text" name="talp_tecnologia_1" placeholder="Palavra 1" />
-                    <select name="talp_tecnologia_1_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
+                    <div class="talp-block">
+                        <div class="talp-indutor">TECNOLOGIA</div>
+                        <p class="field-hint" style="text-align:center;margin-bottom:12px">Pense na tecnologia como você
+                            a vive: celular, internet, aplicativos.</p>
+                        <div class="talp-rank-label">Rank (1 = mais associada)</div>
+                        <br>
+                        <div class="talp-row">
+                            <input type="text" name="talp_tecnologia_1" placeholder="Palavra 1" />
+                            <select name="talp_tecnologia_1_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
 
-                <div class="talp-row">
-                    <input type="text" name="talp_tecnologia_2" placeholder="Palavra 2" />
-                    <select name="talp_tecnologia_2_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                        <div class="talp-row">
+                            <input type="text" name="talp_tecnologia_2" placeholder="Palavra 2" />
+                            <select name="talp_tecnologia_2_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="talp-row">
+                            <input type="text" name="talp_tecnologia_3" placeholder="Palavra 3" />
+                            <select name="talp_tecnologia_3_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <p class="error-msg" id="err-talp-tecnologia">⚠ Por favor, escreva ao menos a primeira palavra
+                            para TECNOLOGIA.</p>
+                    </div>
+
+                    <div class="talp-block">
+                        <div class="talp-indutor">ALGORITMO</div>
+                        <div class="talp-rank-label">Rank (1 = mais associada)</div>
+                        <br>
+                        <div class="talp-row">
+                            <input type="text" name="talp_algoritmo_1" placeholder="Palavra 1" />
+                            <select name="talp_algoritmo_1_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="talp-row">
+                            <input type="text" name="talp_algoritmo_2" placeholder="Palavra 2" />
+                            <select name="talp_algoritmo_2_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="talp-row">
+                            <input type="text" name="talp_algoritmo_3" placeholder="Palavra 3" />
+                            <select name="talp_algoritmo_3_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <p class="error-msg" id="err-talp-algoritmo">⚠ Por favor, escreva ao menos a primeira palavra
+                            para ALGORITMO.</p>
+                    </div>
+
+                    <div class="talp-block">
+                        <div class="talp-indutor">REDES SOCIAIS</div>
+                        <div class="talp-rank-label">Rank (1 = mais associada)</div>
+                        <br>
+                        <div class="talp-row">
+                            <input type="text" name="talp_redes_1" placeholder="Palavra 1" />
+                            <select name="talp_redes_1_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="talp-row">
+                            <input type="text" name="talp_redes_2" placeholder="Palavra 2" />
+                            <select name="talp_redes_2_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="talp-row">
+                            <input type="text" name="talp_redes_3" placeholder="Palavra 3" />
+                            <select name="talp_redes_3_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <p class="error-msg" id="err-talp-redes">⚠ Por favor, escreva ao menos a primeira palavra para
+                            REDES SOCIAIS.</p>
+                    </div>
                 </div>
-                <div class="talp-row">
-                    <input type="text" name="talp_tecnologia_3" placeholder="Palavra 3" />
-                    <select name="talp_tecnologia_3_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="error-msg" id="err-talp-tecnologia">⚠ Por favor, escreva ao menos a primeira palavra para TECNOLOGIA.</p>
             </div>
 
-            <div class="talp-block">
-                <div class="talp-indutor">ALGORITMO</div>
-                <div class="talp-rank-label">Rank (1 = mais associada)</div>
-                <br>
-                <div class="talp-row">
-                    <input type="text" name="talp_algoritmo_1" placeholder="Palavra 1" />
-                    <select name="talp_algoritmo_1_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
+            <!-- STEP 3: TALP Parte 2 -->
+            <div class="step" id="step-3">
+                <div class="step-card">
+                    <div class="section-badge">Associação Livre de Palavras</div>
+                    <h2 class="step-title">Continuando...</h2>
+                    <p class="step-desc">Mesma dinâmica: 3 palavras que vêm à mente + numeração de 1 a 3 por associação.
+                    </p>
 
-                <div class="talp-row">
-                    <input type="text" name="talp_algoritmo_2" placeholder="Palavra 2" />
-                    <select name="talp_algoritmo_2_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <div class="talp-block">
+                        <div class="talp-indutor">REALIDADE</div>
+                        <div class="talp-rank-label">Rank (1 = mais associada)</div>
+                        <br>
+                        <div class="talp-row">
+                            <input type="text" name="talp_realidade_1" placeholder="Palavra 1" />
+                            <select name="talp_realidade_1_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="talp-row">
+                            <input type="text" name="talp_realidade_2" placeholder="Palavra 2" />
+                            <select name="talp_realidade_2_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="talp-row">
+                            <input type="text" name="talp_realidade_3" placeholder="Palavra 3" />
+                            <select name="talp_realidade_3_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <p class="error-msg" id="err-talp-realidade">⚠ Por favor, escreva ao menos a primeira palavra
+                            para REALIDADE.</p>
+                    </div>
+
+                    <div class="talp-block">
+                        <div class="talp-indutor">EXISTÊNCIA</div>
+                        <div class="talp-rank-label">Rank (1 = mais associada)</div>
+                        <br>
+                        <div class="talp-row">
+                            <input type="text" name="talp_existencia_1" placeholder="Palavra 1" />
+                            <select name="talp_existencia_1_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="talp-row">
+                            <input type="text" name="talp_existencia_2" placeholder="Palavra 2" />
+                            <select name="talp_existencia_2_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="talp-row">
+                            <input type="text" name="talp_existencia_3" placeholder="Palavra 3" />
+                            <select name="talp_existencia_3_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <p class="error-msg" id="err-talp-existencia">⚠ Por favor, escreva ao menos a primeira palavra
+                            para EXISTÊNCIA.</p>
+                    </div>
+
+                    <div class="talp-block">
+                        <div class="talp-indutor">ANGÚSTIA</div>
+                        <div class="talp-rank-label">Rank (1 = mais associada)</div>
+                        <br>
+                        <div class="talp-row">
+                            <input type="text" name="talp_angustia_1" placeholder="Palavra 1" />
+                            <select name="talp_angustia_1_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="talp-row">
+                            <input type="text" name="talp_angustia_2" placeholder="Palavra 2" />
+                            <select name="talp_angustia_2_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="talp-row">
+                            <input type="text" name="talp_angustia_3" placeholder="Palavra 3" />
+                            <select name="talp_angustia_3_rank">
+                                <option value="">—</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <p class="error-msg" id="err-talp-angustia">⚠ Por favor, escreva ao menos a primeira palavra
+                            para ANGÚSTIA.</p>
+                    </div>
                 </div>
-                <div class="talp-row">
-                    <input type="text" name="talp_algoritmo_3" placeholder="Palavra 3" />
-                    <select name="talp_algoritmo_3_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="error-msg" id="err-talp-algoritmo">⚠ Por favor, escreva ao menos a primeira palavra para ALGORITMO.</p>
             </div>
 
-            <div class="talp-block">
-                <div class="talp-indutor">REDES SOCIAIS</div>
-                <div class="talp-rank-label">Rank (1 = mais associada)</div>
-                <br>
-                <div class="talp-row">
-                    <input type="text" name="talp_redes_1" placeholder="Palavra 1" />
-                    <select name="talp_redes_1_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-
-                <div class="talp-row">
-                    <input type="text" name="talp_redes_2" placeholder="Palavra 2" />
-                    <select name="talp_redes_2_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <div class="talp-row">
-                    <input type="text" name="talp_redes_3" placeholder="Palavra 3" />
-                    <select name="talp_redes_3_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="error-msg" id="err-talp-redes">⚠ Por favor, escreva ao menos a primeira palavra para REDES SOCIAIS.</p>
-            </div>
-
-            <div class="talp-block">
-                <div class="talp-indutor">REALIDADE</div>
-                <div class="talp-rank-label">Rank (1 = mais associada)</div>
-                <br>
-                <div class="talp-row">
-                    <input type="text" name="talp_realidade_1" placeholder="Palavra 1" />
-                    <select name="talp_realidade_1_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-
-                <div class="talp-row">
-                    <input type="text" name="talp_realidade_2" placeholder="Palavra 2" />
-                    <select name="talp_realidade_2_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <div class="talp-row">
-                    <input type="text" name="talp_realidade_3" placeholder="Palavra 3" />
-                    <select name="talp_realidade_3_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="error-msg" id="err-talp-realidade">⚠ Por favor, escreva ao menos a primeira palavra para REALIDADE.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- STEP 3: TALP Parte 2 -->
-    <div class="step" id="step-3">
-        <div class="step-card">
-            <div class="section-badge">Associação Livre de Palavras</div>
-            <h2 class="step-title">Continuando...</h2>
-            <p class="step-desc">Mesma dinâmica: 3 palavras que vêm à mente + numeração de 1 a 3 por associação.
-            </p>
-
-            <div class="talp-block">
-                <div class="talp-indutor">EXISTÊNCIA</div>
-                <div class="talp-rank-label">Rank (1 = mais associada)</div>
-                <br>
-                <div class="talp-row">
-                    <input type="text" name="talp_existencia_1" placeholder="Palavra 1" />
-                    <select name="talp_existencia_1_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-
-                <div class="talp-row">
-                    <input type="text" name="talp_existencia_2" placeholder="Palavra 2" />
-                    <select name="talp_existencia_2_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <div class="talp-row">
-                    <input type="text" name="talp_existencia_3" placeholder="Palavra 3" />
-                    <select name="talp_existencia_3_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="error-msg" id="err-talp-existencia">⚠ Por favor, escreva ao menos a primeira palavra para EXISTÊNCIA.</p>
-            </div>
-
-            <div class="talp-block">
-                <div class="talp-indutor">ANGÚSTIA</div>
-                <div class="talp-rank-label">Rank (1 = mais associada)</div>
-                <br>
-                <div class="talp-row">
-                    <input type="text" name="talp_angustia_1" placeholder="Palavra 1" />
-                    <select name="talp_angustia_1_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-
-                <div class="talp-row">
-                    <input type="text" name="talp_angustia_2" placeholder="Palavra 2" />
-                    <select name="talp_angustia_2_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <div class="talp-row">
-                    <input type="text" name="talp_angustia_3" placeholder="Palavra 3" />
-                    <select name="talp_angustia_3_rank">
-                        <option value="">—</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="error-msg" id="err-talp-angustia">⚠ Por favor, escreva ao menos a primeira palavra para ANGÚSTIA.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- STEP 4: Saúde e Estilo de Vida -->
+            <!-- STEP 4: Saúde e Estilo de Vida -->
             <div class="step" id="step-4">
                 <div class="step-card">
                     <div class="section-badge">Perfil Socioeconômico</div>
@@ -1618,7 +1634,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-                function validateStep(n) {
+        function validateStep(n) {
             let valid = true;
 
             function errRadio(name, id) {
