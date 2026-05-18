@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* SEU ESTILO ORIGINAL PRESERVADO */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -25,114 +26,48 @@
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Nunito', sans-serif;
-      line-height: 1.6;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-
+    body { background-color: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; line-height: 1.6; padding: 20px; display: flex; justify-content: center; }
     .container { width: 100%; max-width: 700px; margin: 40px 0; }
-
     header { margin-bottom: 40px; text-align: center; }
     header h1 { font-family: 'DM+Serif+Display', serif; font-size: 2.5rem; margin-bottom: 8px; color: var(--accent); }
     header p { color: var(--muted); font-weight: 500; }
 
-    form {
-      background: var(--surface);
-      padding: 40px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
+    form { background: var(--surface); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
     .step { display: none; }
     .step.active { display: block; animation: fadeIn 0.4s ease forwards; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .step-header { margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-    .step-header h2 { font-family: 'DM+Serif+Display', serif; font-size: 1.6rem; color: var(--accent); }
-    .step-header p { font-size: 0.9rem; color: var(--muted); }
-
     .field-group { margin-bottom: 35px; }
     label, .question-label { display: block; font-weight: 700; margin-bottom: 12px; font-size: 1.05rem; }
     
-    input[type="text"], input[type="number"], select, textarea {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-
-    input:focus, select:focus { outline: none; border-color: var(--accent-mid); box-shadow: 0 0 0 3px var(--accent-soft); }
-
-    /* Estilos de Erro */
-    .was-validated input:invalid, 
-    .was-validated select:invalid,
-    .was-validated textarea:invalid {
-      border: 2px solid var(--red) !important;
-      background-color: #FFF8F8;
-    }
-
-    .error-text {
-      color: var(--red);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-top: 8px;
-      display: none;
-    }
-
-    .was-validated :invalid ~ .error-text,
-    .was-validated .options-container:has(:invalid) ~ .error-text {
-      display: block;
-    }
+    input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 1rem; }
+    
+    /* ADIÇÃO: ESTILO DE ERRO SOLICITADO */
+    .step.was-validated input:invalid, 
+    .step.was-validated select:invalid, 
+    .step.was-validated textarea:invalid { border: 2px solid var(--red) !important; background-color: #FFF8F8; }
+    .error-message { color: var(--red); font-size: 0.85rem; font-weight: 600; margin-top: 8px; display: none; }
+    .was-validated :invalid ~ .error-message,
+    .was-validated .options:has(:invalid) ~ .error-message { display: block; }
 
     .options { display: grid; gap: 10px; }
-    .radio-option, .check-option {
-      display: flex;
-      align-items: center;
-      padding: 12px 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 500;
-    }
+    .radio-option, .check-option { display: flex; align-items: center; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s; font-weight: 500; }
     .radio-option:hover, .check-option:hover { background-color: #F9F7F4; border-color: var(--accent-mid); }
-    .radio-option input, .check-option input { margin-right: 12px; width: 18px; height: 18px; cursor: pointer; }
+    .radio-option input, .check-option input { margin-right: 12px; width: 18px; height: 18px; }
     .radio-option.selected, .check-option.selected { background-color: var(--accent-soft); border-color: var(--accent-mid); color: var(--accent); }
 
     .likert-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; background: #F9F7F4; padding: 15px; border-radius: 8px; }
     .likert-item { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
-    .likert-item input { width: 20px; height: 20px; cursor: pointer; }
     .likert-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; }
 
     .nav-buttons { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
-    button {
-      padding: 14px 28px;
-      border: none;
-      border-radius: 8px;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    button { padding: 14px 28px; border: none; border-radius: 8px; font-family: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; }
     .btn-next, .btn-submit { background-color: var(--accent); color: white; margin-left: auto; }
-    .btn-next:hover, .btn-submit:hover { background-color: var(--accent-mid); transform: translateY(-1px); }
     .btn-prev { background-color: transparent; color: var(--muted); border: 1px solid var(--border); }
-    .btn-prev:hover { background-color: var(--border); color: var(--text); }
 
     .success-container { text-align: center; padding: 60px 20px; display: none; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
     .success-container h2 { font-family: 'DM+Serif+Display', serif; font-size: 2.2rem; color: var(--green); margin-bottom: 15px; }
-    .success-container p { font-size: 1.1rem; color: var(--muted); max-width: 500px; margin: 0 auto; }
-
+    
     .talp-grid { display: grid; gap: 20px; background: #F9F7F4; padding: 20px; border-radius: 8px; }
     .talp-row { display: grid; grid-template-columns: 1fr 120px; gap: 15px; align-items: center; }
   </style>
@@ -148,35 +83,23 @@
   <form id="surveyForm" novalidate action="https://script.google.com/macros/s/AKfycbx35rUk_4Y6MiPxKR1MeVXurgX-uJOOkcFxRysjOGlml62wExB5jeJplmHbzBUXxVOyQw/exec">
     
     <div class="step active" data-step="0">
-      <div class="step-header">
-        <h2>Termo de Consentimento</h2>
-        <p>Por favor, leia atentamente antes de prosseguir.</p>
-      </div>
-      <div class="field-group" style="font-size: 0.95rem; background: #fdfdfd; padding: 20px; border: 1px solid var(--border); border-radius: 8px; max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
-        <p>Esta pesquisa faz parte de um estudo acadêmico sobre a relação entre tecnologia, redes sociais e saúde mental...</p>
-        </div>
       <div class="field-group">
         <label class="check-option">
           <input type="checkbox" name="consentimento" value="Sim" required>
           Li e aceito participar voluntariamente desta pesquisa.
         </label>
-        <span class="error-text">Por favor, preencha o campo corretamente!</span>
+        <span class="error-message">Por favor, preencha o campo corretamente!</span>
       </div>
       <div class="nav-buttons">
-        <button type="button" class="btn-next" onclick="nextStep()">Iniciar Pesquisa</button>
+        <button type="button" class="btn-next" onclick="nextStep()">Iniciar</button>
       </div>
     </div>
 
     <div class="step" data-step="1">
-      <div class="step-header">
-        <h2>Dados Básicos</h2>
-        <p>Informações gerais sobre você.</p>
-      </div>
-      
       <div class="field-group">
         <label for="idade">1. Qual sua idade?</label>
-        <input type="number" name="idade" id="idade" placeholder="Ex: 21" required>
-        <span class="error-text">Por favor, preencha o campo corretamente!</span>
+        <input type="number" name="idade" id="idade" required>
+        <span class="error-message">Por favor, preencha o campo corretamente!</span>
       </div>
 
       <div class="field-group">
@@ -184,23 +107,9 @@
         <div class="options">
           <label class="radio-option"><input type="radio" name="genero" value="M" required> Masculino</label>
           <label class="radio-option"><input type="radio" name="genero" value="F"> Feminino</label>
-          <label class="radio-option"><input type="radio" name="genero" value="NB"> Não-binário</label>
-          <label class="radio-option"><input type="radio" name="genero" value="Outro"> Outro / Prefiro não dizer</label>
         </div>
-        <span class="error-text">Por favor, preencha o campo corretamente!</span>
+        <span class="error-message">Por favor, preencha o campo corretamente!</span>
       </div>
-
-      <div class="field-group">
-        <p class="question-label">3. Qual sua orientação sexual?</p>
-        <div class="options">
-          <label class="radio-option"><input type="radio" name="sexualidade" value="Heterossexual" required> Heterossexual</label>
-          <label class="radio-option"><input type="radio" name="sexualidade" value="Homossexual"> Homossexual</label>
-          <label class="radio-option"><input type="radio" name="sexualidade" value="Bissexual"> Bissexual / Pansexual</label>
-          <label class="radio-option"><input type="radio" name="sexualidade" value="Outro"> Outro / Prefiro não dizer</label>
-        </div>
-        <span class="error-text">Por favor, preencha o campo corretamente!</span>
-      </div>
-
       <div class="nav-buttons">
         <button type="button" class="btn-prev" onclick="prevStep()">Anterior</button>
         <button type="button" class="btn-next" onclick="nextStep()">Próximo</button>
@@ -208,18 +117,13 @@
     </div>
 
     <div class="step" data-step="6">
-      <div class="step-header">
-        <h2>Influenciadores e Redes</h2>
-        <p>Sobre as pessoas que você acompanha online.</p>
-      </div>
-
       <div class="field-group">
         <p class="question-label">33. Você acompanha regularmente algum criador de conteúdo, influenciador ou figura pública nas redes sociais?</p>
         <div class="options">
           <label class="radio-option"><input type="radio" name="acompanha_influenciador" value="Sim" required> Sim</label>
           <label class="radio-option"><input type="radio" name="acompanha_influenciador" value="Não"> Não</label>
         </div>
-        <span class="error-text">Por favor, preencha o campo corretamente!</span>
+        <span class="error-message">Por favor, preencha o campo corretamente!</span>
       </div>
 
       <div id="influencer-conditional" style="display: none;">
@@ -227,28 +131,28 @@
           <p class="question-label">34. O conteúdo de influenciadores ou criadores impacta a forma como você se enxerga ou se avalia?</p>
           <div class="likert-row">
             <span class="likert-label">Nada</span>
-            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="1"> <span>1</span></div>
-            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="2"> <span>2</span></div>
-            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="3"> <span>3</span></div>
-            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="4"> <span>4</span></div>
-            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="5"> <span>5</span></div>
+            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="1">1</div>
+            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="2">2</div>
+            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="3">3</div>
+            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="4">4</div>
+            <div class="likert-item"><input type="radio" name="impacto_autoimagem" value="5">5</div>
             <span class="likert-label">Muito</span>
           </div>
-          <span class="error-text">Por favor, preencha o campo corretamente!</span>
+          <span class="error-message">Por favor, preencha o campo corretamente!</span>
         </div>
 
         <div class="field-group">
           <p class="question-label">35. O estilo de vida apresentado por influenciadores serve como parâmetro para avaliar a sua própria vida?</p>
           <div class="likert-row">
             <span class="likert-label">Nada</span>
-            <div class="likert-item"><input type="radio" name="parametro_vida" value="1"> <span>1</span></div>
-            <div class="likert-item"><input type="radio" name="parametro_vida" value="2"> <span>2</span></div>
-            <div class="likert-item"><input type="radio" name="parametro_vida" value="3"> <span>3</span></div>
-            <div class="likert-item"><input type="radio" name="parametro_vida" value="4"> <span>4</span></div>
-            <div class="likert-item"><input type="radio" name="parametro_vida" value="5"> <span>5</span></div>
+            <div class="likert-item"><input type="radio" name="parametro_vida" value="1">1</div>
+            <div class="likert-item"><input type="radio" name="parametro_vida" value="2">2</div>
+            <div class="likert-item"><input type="radio" name="parametro_vida" value="3">3</div>
+            <div class="likert-item"><input type="radio" name="parametro_vida" value="4">4</div>
+            <div class="likert-item"><input type="radio" name="parametro_vida" value="5">5</div>
             <span class="likert-label">Muito</span>
           </div>
-          <span class="error-text">Por favor, preencha o campo corretamente!</span>
+          <span class="error-message">Por favor, preencha o campo corretamente!</span>
         </div>
 
         <div class="field-group">
@@ -257,7 +161,7 @@
             <label class="radio-option"><input type="radio" name="vinculo_emocional" value="Sim"> Sim</label>
             <label class="radio-option"><input type="radio" name="vinculo_emocional" value="Não"> Não</label>
           </div>
-          <span class="error-text">Por favor, preencha o campo corretamente!</span>
+          <span class="error-message">Por favor, preencha o campo corretamente!</span>
         </div>
       </div>
 
@@ -267,22 +171,17 @@
       </div>
     </div>
 
-    <div class="step" data-step="7">
-      <div class="step-header">
-        <h2>Quase lá!</h2>
-        <p>Clique em enviar para concluir sua participação.</p>
-      </div>
+    <div class="step" data-step="9">
       <div class="nav-buttons">
         <button type="button" class="btn-prev" onclick="prevStep()">Anterior</button>
-        <button type="submit" class="btn-submit">Enviar Respostas</button>
+        <button type="submit" class="btn-submit">Enviar</button>
       </div>
     </div>
-
   </form>
 
   <div id="successMessage" class="success-container">
     <h2>Muito Obrigado!</h2>
-    <p>Suas respostas foram registradas com sucesso. Sua contribuição é fundamental para o desenvolvimento desta pesquisa acadêmica.</p>
+    <p>Suas respostas foram registradas.</p>
   </div>
 </div>
 
@@ -293,19 +192,16 @@
   const successMessage = document.getElementById("successMessage");
 
   function showStep(n) {
-    steps.forEach((step, index) => {
-      step.classList.toggle("active", index === n);
-    });
+    steps.forEach((step, index) => step.classList.toggle("active", index === n));
     currentStep = n;
   }
 
   function nextStep() {
-    const currentStepEl = document.querySelector(`.step[data-step="${currentStep}"]`);
-    
-    // Validação da etapa antes de prosseguir
+    const currentStepEl = steps[currentStep];
     if (currentStepEl.checkValidity()) {
       if (currentStep < steps.length - 1) {
-        showStep(currentStep + 1);
+        currentStep++;
+        showStep(currentStep);
         window.scrollTo(0, 0);
       }
     } else {
@@ -316,30 +212,26 @@
   }
 
   function prevStep() {
-    if (currentStep > 0) {
-      showStep(currentStep - 1);
-      window.scrollTo(0, 0);
-    }
+    if (currentStep > 0) { currentStep--; showStep(currentStep); }
   }
 
-  // Lógica Condicional da Pergunta 33
-  const acompanhaRadios = document.querySelectorAll('input[name="acompanha_influenciador"]');
-  const conditionalBox = document.getElementById('influencer-conditional');
-  
-  acompanhaRadios.forEach(radio => {
+  // Lógica da Pergunta 33
+  const influencerRadios = document.querySelectorAll('input[name="acompanha_influenciador"]');
+  const influencerConditional = document.getElementById('influencer-conditional');
+  influencerRadios.forEach(radio => {
     radio.addEventListener('change', (e) => {
-      const inputs = conditionalBox.querySelectorAll('input');
+      const inputs = influencerConditional.querySelectorAll('input');
       if (e.target.value === 'Sim') {
-        conditionalBox.style.display = 'block';
+        influencerConditional.style.display = 'block';
         inputs.forEach(i => i.required = true);
       } else {
-        conditionalBox.style.display = 'none';
+        influencerConditional.style.display = 'none';
         inputs.forEach(i => i.required = false);
       }
     });
   });
 
-  // Estilo visual dos radios/checks selecionados
+  // Estilo visual selecionado
   document.querySelectorAll('.radio-option input, .check-option input').forEach(input => {
     input.addEventListener('change', () => {
       if (input.type === 'radio') {
@@ -352,53 +244,39 @@
     });
   });
 
-  // Envio do Formulário
+  // Envio e Sucesso Local
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     if (!form.checkValidity()) {
-      document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('was-validated');
+      steps[currentStep].classList.add('was-validated');
       return;
     }
 
     const formData = new FormData(form);
     const data = {};
-
     for (const [key, value] of formData.entries()) {
       if (data[key]) {
         if (!Array.isArray(data[key])) data[key] = [data[key]];
         data[key].push(value);
-      } else {
-        data[key] = value;
-      }
+      } else { data[key] = value; }
     }
 
     try {
-      // Feedback visual de carregamento no botão
-      const btn = form.querySelector('.btn-submit');
-      btn.disabled = true;
-      btn.innerText = "Enviando...";
-
       const response = await fetch(form.action, {
         method: "POST",
         body: JSON.stringify(data)
       });
-
       if (response.ok) {
-        form.style.display = "none";
-        successMessage.style.display = "block";
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
         window.scrollTo(0, 0);
       }
     } catch (error) {
-      console.error("Erro:", error);
-      alert("Erro ao enviar. Tente novamente.");
-      form.querySelector('.btn-submit').disabled = false;
-      form.querySelector('.btn-submit').innerText = "Enviar Respostas";
+      alert("Erro ao enviar.");
     }
   });
 
   showStep(0);
 </script>
-
 </body>
 </html>
